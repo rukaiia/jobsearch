@@ -1,0 +1,62 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: your_name
+      changes:
+        - insert:
+            tableName: users
+            columns:
+              - column:
+                  name: phone
+                  value: '123-456-7890'
+              - column:
+                  name: name
+                  value: 'John Doe'
+              - column:
+                  name: password
+                  value: 'password1'
+              - column:
+                  name: role
+                  value: 'USER'
+
+        - insert:
+            tableName: users
+            columns:
+              - column:
+                  name: phone
+                  value: '987-654-3210'
+              - column:
+                  name: name
+                  value: 'Jane Smith'
+              - column:
+                  name: password
+                  value: 'password2'
+              - column:
+                  name: role
+                  value: 'USER'
+
+        - insert:
+            tableName: accounts
+            columns:
+              - column:
+                  name: user_id
+                  value: 1
+              - column:
+                  name: currency
+                  value: 'USD'
+              - column:
+                  name: balance
+                  value: 1000
+
+        - insert:
+            tableName: accounts
+            columns:
+              - column:
+                  name: user_id
+                  value: 2
+              - column:
+                  name: currency
+                  value: 'USD'
+              - column:
+                  name: balance
+                  value: 1500

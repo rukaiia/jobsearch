@@ -1,0 +1,114 @@
+
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: your_name
+      changes:
+        - createTable:
+            tableName: users
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: phone
+                  type: varchar(20)
+              - column:
+                  name: name
+                  type: varchar(100)
+              - column:
+                  name: password
+                  type: varchar(255)
+              - column:
+                  name: role
+                  type: varchar(20)
+                  constraints:
+                    defaultValue: 'USER'
+
+        - createTable:
+            tableName: accounts
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: user_id
+                  type: int
+              - column:
+                  name: currency
+                  type: varchar(10)
+              - column:
+                  name: balance
+                  type: double
+              - foreignKeyConstraint:
+                  baseTableName: accounts
+                  baseColumnNames: user_id
+                  referencedTableName: users
+                  referencedColumnNames: id
+
+        - createTable:
+            tableName: transactions
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: from_account_id
+                  type: int
+              - column:
+                  name: to_account_id
+                  type: int
+              - column:
+                  name: amount
+                  type: double
+              - column:
+                  name: transaction_date
+                  type: timestamp
+              - column:
+                  name: status
+                  type: varchar(20)
+                  constraints:
+                    defaultValue: 'PENDING'
+              - foreignKeyConstraint:
+                  baseTableName: transactions
+                  baseColumnNames: from_account_id
+                  referencedTableName: accounts
+                  referencedColumnNames: id
+              - foreignKeyConstraint:
+                  baseTableName: transactions
+                  baseColumnNames: to_account_id
+                  referencedTableName: accounts
+                  referencedColumnNames: id
+
+        - createTable:
+            tableName: transaction_logs
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: transaction_id
+                  type: int
+              - column:
+                  name: action
+                  type: varchar(50)
+              - column:
+                  name: action_date
+                  type: timestamp
+              - foreignKeyConstraint:
+                  baseTableName: transaction_logs
+                  baseColumnNames: transaction_id
+                  referencedTableName: transactions
+                  referencedColumnNames: id

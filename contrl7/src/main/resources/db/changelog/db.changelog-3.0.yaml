@@ -1,0 +1,21 @@
+
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: your_name
+      changes:
+        - addColumn:
+            tableName: transactions
+            columns:
+              - column:
+                  name: requires_approval
+                  type: boolean
+                  constraints:
+                    defaultValue: false
+
+        - addColumn:
+            tableName: transaction_logs
+            columns:
+              - column:
+                  name: rollback_date
+                  type: timestamp
