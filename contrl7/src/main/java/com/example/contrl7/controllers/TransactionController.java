@@ -26,7 +26,7 @@ public class TransactionController {
     }
 
     @PostMapping
-    public void create(@RequestBody Transaction transaction) {
+    public void creating(@RequestBody Transaction transaction) {
         logger.info("Создание транзакции: от счета {} на счет {} сумма {}",
                 transaction.getFromAccountId(),
                 transaction.getToAccountId(),
