@@ -25,7 +25,7 @@ public class MainController {
         return transactionService.getTransactionHistory(null);
     }
     @DeleteMapping("/transactions/{id}")
-    public void delete(@PathVariable Integer id) {
+    public void deleting(@PathVariable Integer id) {
         transactionService.delete(id);
     }
 

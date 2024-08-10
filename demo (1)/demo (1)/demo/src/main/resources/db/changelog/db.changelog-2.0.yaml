@@ -1,0 +1,157 @@
+
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: your_name
+      changes:
+        - insert:
+            tableName: users
+            columns:
+              - column:
+                  name: name
+                  value: 'John Doe'
+              - column:
+                  name: phone
+                  value: '123-456-7890'
+              - column:
+                  name: email
+                  value: 'john.doe@example.com'
+              - column:
+                  name: user_type
+                  value: 'APPLICANT'
+
+        - insert:
+            tableName: users
+            columns:
+              - column:
+                  name: name
+                  value: 'Jane Smith'
+              - column:
+                  name: phone
+                  value: '987-654-3210'
+              - column:
+                  name: email
+                  value: 'jane.smith@example.com'
+              - column:
+                  name: user_type
+                  value: 'EMPLOYER'
+
+        - insert:
+            tableName: resumes
+            columns:
+              - column:
+                  name: applicant_id
+                  value: 1
+              - column:
+                  name: name
+                  value: 'Software Developer'
+              - column:
+                  name: category_id
+                  value: 1
+              - column:
+                  name: salary
+                  value: 70000
+              - column:
+                  name: is_active
+                  value: true
+              - column:
+                  name: created_date
+                  valueDate: CURRENT_TIMESTAMP
+
+        - insert:
+            tableName: resumes
+            columns:
+              - column:
+                  name: applicant_id
+                  value: 1
+              - column:
+                  name: name
+                  value: 'Senior Software Engineer'
+              - column:
+                  name: category_id
+                  value: 2
+              - column:
+                  name: salary
+                  value: 90000
+              - column:
+                  name: is_active
+                  value: true
+              - column:
+                  name: created_date
+                  valueDate: CURRENT_TIMESTAMP
+
+        - insert:
+            tableName: vacancies
+            columns:
+              - column:
+                  name: employer_id
+                  value: 2
+              - column:
+                  name: title
+                  value: 'Junior Developer'
+              - column:
+                  name: category_id
+                  value: 1
+              - column:
+                  name: salary
+                  value: 60000
+              - column:
+                  name: description
+                  value: 'Looking for a junior developer with experience in Java.'
+              - column:
+                  name: is_active
+                  value: true
+              - column:
+                  name: created_date
+                  valueDate: CURRENT_TIMESTAMP
+
+        - insert:
+            tableName: vacancies
+            columns:
+              - column:
+                  name: employer_id
+                  value: 2
+              - column:
+                  name: title
+                  value: 'Lead Developer'
+              - column:
+                  name: category_id
+                  value: 2
+              - column:
+                  name: salary
+                  value: 100000
+              - column:
+                  name: description
+                  value: 'Looking for a lead developer with experience in large projects.'
+              - column:
+                  name: is_active
+                  value: true
+              - column:
+                  name: created_date
+                  valueDate: CURRENT_TIMESTAMP
+
+        - insert:
+            tableName: applications
+            columns:
+              - column:
+                  name: resume_id
+                  value: 1
+              - column:
+                  name: vacancy_id
+                  value: 1
+              - column:
+                  name: application_date
+                  valueDate: CURRENT_TIMESTAMP
+
+        - insert:
+            tableName: applications
+            columns:
+              - column:
+                  name: resume_id
+                  value: 2
+              - column:
+                  name: vacancy_id
+                  value: 2
+              - column:
+                  name: application_date
+                  valueDate: CURRENT_TIMESTAMP

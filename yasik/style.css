@@ -1,0 +1,46 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+.ahmad h1{
+    margin-left: 500px;
+
+}
+.ahmad2{
+      margin-left: 480px;
+ 
+}
+a{
+    text-decoration: none;
+    color: green;
+    font-size: 50px;
+    margin-left: 300px;
+}
+.ahmad p{
+    font-size: 30px;
+    margin-left: 300px ;
+}
+h2{
+    font-size: 70px;
+    
+   margin-right: 400px;
+   color: red;
+
+}
+.ahmad2 p{
+    font-size: 30px;
+   width: 800px;
+}
+.ahmad2 img{
+  margin-left: 100px;
+ font-size: 900px;
+}
+.span{
+    color: black;
+    font-size: 20px;
+}

@@ -1,0 +1,132 @@
+
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: your_name
+      changes:
+        - createTable:
+            tableName: users
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: name
+                  type: varchar(100)
+              - column:
+                  name: phone
+                  type: varchar(20)
+              - column:
+                  name: email
+                  type: varchar(100)
+                  constraints:
+                    unique: true
+              - column:
+                  name: user_type
+                  type: varchar(20)
+                  constraints:
+                    check: user_type IN ('APPLICANT', 'EMPLOYER')
+
+        - createTable:
+            tableName: resumes
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: applicant_id
+                  type: int
+              - column:
+                  name: name
+                  type: varchar(100)
+              - column:
+                  name: category_id
+                  type: int
+              - column:
+                  name: salary
+                  type: double
+              - column:
+                  name: is_active
+                  type: boolean
+              - column:
+                  name: created_date
+                  type: timestamp
+              - column:
+                  name: update_time
+                  type: timestamp
+              - foreignKeyConstraint:
+                  baseTableName: resumes
+                  baseColumnNames: applicant_id
+                  referencedTableName: users
+                  referencedColumnNames: id
+
+        - createTable:
+            tableName: vacancies
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: employer_id
+                  type: int
+              - column:
+                  name: title
+                  type: varchar(100)
+              - column:
+                  name: category_id
+                  type: int
+              - column:
+                  name: salary
+                  type: double
+              - column:
+                  name: description
+                  type: text
+              - column:
+                  name: is_active
+                  type: boolean
+              - column:
+                  name: created_date
+                  type: timestamp
+              - foreignKeyConstraint:
+                  baseTableName: vacancies
+                  baseColumnNames: employer_id
+                  referencedTableName: users
+                  referencedColumnNames: id
+
+        - createTable:
+            tableName: applications
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: resume_id
+                  type: int
+              - column:
+                  name: vacancy_id
+                  type: int
+              - column:
+                  name: application_date
+                  type: timestamp
+              - foreignKeyConstraint:
+                  baseTableName: applications
+                  baseColumnNames: resume_id
+                  referencedTableName: resumes
+                  referencedColumnNames: id
+              - foreignKeyConstraint:
+                  baseTableName: applications
+                  baseColumnNames: vacancy_id
+                  referencedTableName: vacancies
+                  referencedColumnNames: id

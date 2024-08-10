@@ -1,0 +1,79 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.util.Random;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+public class ChatServer {
+
+    private static ConcurrentHashMap<String, Socket> connectedUsers = new ConcurrentHashMap<>();
+    private static ExecutorService pool = Executors.newCachedThreadPool();
+
+    public static void main(String[] args) {
+        startServer();
+    }
+
+    private static void startServer() {
+        try (ServerSocket serverSocket = new ServerSocket(8080)) {
+            System.out.println("Сервер запущен и ожидает подключения...");
+            while (true) {
+                Socket clientSocket = serverSocket.accept();
+                pool.submit(() -> handleClient(clientSocket));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void handleClient(Socket clientSocket) {
+        String clientId = generateRandomName();
+        connectedUsers.put(clientId, clientSocket);
+        System.out.println("Пользователь подключен: " + clientId);
+
+        try (BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()))) {
+            String message;
+            while ((message = in.readLine()) != null) {
+                sendMessageToAll(clientId, message);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                connectedUsers.remove(clientId);
+                clientSocket.close();
+                System.out.println("Пользователь отключен: " + clientId);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private static String generateRandomName() {
+        String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+        StringBuilder name = new StringBuilder();
+        Random random = new Random();
+        int nameLength = random.nextInt(5) + 5; // имя длиной от 5 до 10 символов
+        for (int i = 0; i < nameLength; i++) {
+            name.append(chars.charAt(random.nextInt(chars.length())));
+        }
+        return name.toString();
+    }
+
+    private static void sendMessageToAll(String senderId, String message) {
+        connectedUsers.forEach((clientId, socket) -> {
+            if (!clientId.equals(senderId)) {
+                try {
+                    PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
+                    out.println(senderId + ": " + message);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+}
