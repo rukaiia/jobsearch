@@ -17,7 +17,7 @@ public class UserService {
     private static final Logger logger = LoggerFactory.getLogger(UserService.class);
 
     public void register(User user) {
-        logger.info("регистрацияz" , user);
+        logger.info("регистрация" , user);
 
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
