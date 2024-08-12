@@ -2,7 +2,7 @@
 databaseChangeLog:
   - changeSet:
       id: 1
-      author: your_name
+      author: Rukaiia
       changes:
         - createTable:
             tableName: users
