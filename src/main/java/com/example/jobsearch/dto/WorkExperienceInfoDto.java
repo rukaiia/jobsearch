@@ -21,6 +21,7 @@ public class WorkExperienceInfoDto {
     @JsonProperty("resume_id")
     private Integer resumeId;
 
+
     @NotNull
     @Positive
     @Max(60)
