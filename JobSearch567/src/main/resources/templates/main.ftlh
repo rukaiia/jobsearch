@@ -44,7 +44,7 @@
         </#list>
     </div>
 
-<#-- Если пользователь является работодателем, отображаем резюме -->
+
     <#if userRole == "EMPLOYER">
         <h1 class="text-center text-success mb-1">Резюме:</h1>
         <div class="row row-cols-1 row-cols-md-3 g-4 justify-content-center">
