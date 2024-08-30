@@ -311,4 +311,6 @@ public class VacancyServiceImpl implements VacancyService {
             throw new ResumeNotFoundException("Не найдена вакансия");
         }
     }
+
+
 }

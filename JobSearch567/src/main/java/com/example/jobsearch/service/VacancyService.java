@@ -46,4 +46,6 @@ public interface VacancyService {
     List<VacancyDto> getVacanciesByCategoryAndUser(int userId, String category);
 
     void getVacancy(int id, Model model);
+
+
 }

@@ -1,6 +1,7 @@
 package com.example.jobsearch.controller;
 
 import com.example.jobsearch.service.CategoryService;
+import com.example.jobsearch.service.ResumeService;
 import com.example.jobsearch.service.UserService;
 import com.example.jobsearch.service.VacancyService;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +19,7 @@ public class MainController {
     private final VacancyService vacancyService;
     private final UserService userService;
     private final CategoryService categoryService;
+    private final ResumeService resumeService;
 
     @GetMapping
     public String getMainPage(Model model,
@@ -28,11 +30,12 @@ public class MainController {
         model.addAttribute("vacancies", vacancyService.getVacanciesWithPaging(page, pageSize, category));
         model.addAttribute("page", page);
         model.addAttribute("categories", categoryService.getAllCategories());
+        model.addAttribute("resume", resumeService.getResumesWithPaging(page, pageSize));
         return "main";
     }
 
     @GetMapping("vacancies/{id}")
-    public String getResume(@PathVariable int id, Model model) {
+    public String getVacancy(@PathVariable int id, Model model) {
         vacancyService.getVacancy(id, model);
         return "employer/vacancy";
     }
@@ -41,4 +44,14 @@ public class MainController {
     public String getTestLogin() {
         return "login";
     }
+
+    @GetMapping("resumes/{id}")
+    public String getResume(@PathVariable int id, Model model) {
+        resumeService.getResume(id, model);
+        return "employee/resume";
+    }
 }
+
+
+
+
